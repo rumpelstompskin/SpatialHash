@@ -10,6 +10,13 @@ other uses.
 Included is the floating point class which is intended to be used with a
 floating point system.
 
+# Examples
+
+https://youtu.be/_Bi2s52-eGU
+https://youtu.be/I2fa91Nf-aU
+https://youtu.be/NWYtvxhtdaw
+https://youtu.be/kA9PHMIkLwY
+
 # Credits
 
 Based on the code from Sixman9
