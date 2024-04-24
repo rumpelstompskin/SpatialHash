@@ -332,27 +332,3 @@ public class SpatialHash
         return new FloatingPoint(x, y, z);
     }
 }
-
-public class FloatingPoint
-{
-    public double x;
-    public double y;
-    public double z;
-
-    public FloatingPoint(double x, double y, double z)
-    {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-    }
-
-    public static implicit operator FloatingPoint(Vector3 v)
-    {
-        return new FloatingPoint(v.x, v.y, v.z);
-    }
-
-    public static implicit operator Vector3(FloatingPoint v)
-    {
-        return new Vector3((float)v.x, (float)v.y, (float)v.z);
-    }
-}
