@@ -44,59 +44,58 @@ public class SpatialHash
 
     public void Insert(Vector3 v, object obj)
     {
-        foreach (string key in Keys(v))
+        var key = Key(v);
+
+        if (idx.ContainsKey(key))
         {
-            if (idx.ContainsKey(key))
-                idx[key].Add(obj);
-            else
-            {
-                HashSet<object> cell = new HashSet<object>();
-                cell.Add(obj);
-                idx.Add(key, cell);
-            }
+            idx[key].Add(obj);
+        } else
+        {
+            HashSet<object> cell = new HashSet<object>();
+            cell.Add(obj);
+            idx.Add(key, cell);
         }
     }
 
     public void Insert(FloatingPoint v, object obj)
     {
-        foreach (string key in Keys(v))
+        var key = Key(v);
+
+        if (idx.ContainsKey(key))
         {
-            if (idx.ContainsKey(key))
-                idx[key].Add(obj);
-            else
-            {
-                HashSet<object> cell = new HashSet<object>();
-                cell.Add(obj);
-                idx.Add(key, cell);
-            }
+            idx[key].Add(obj);
+        }
+        else
+        {
+            HashSet<object> cell = new HashSet<object>();
+            cell.Add(obj);
+            idx.Add(key, cell);
         }
     }
 
     public void Remove(Vector3 v, object obj)
     {
-        foreach (string key in Keys(v))
-        {
-            if (idx.ContainsKey(key))
-            {
-                idx[key].Remove(obj);
+        var key = Key(v);
 
-                if (idx[key].Count == 0) // If the cell is empty after removal, remove it from the index
-                    idx.Remove(key);
-            }
+        if (idx.ContainsKey(key))
+        {
+            idx[key].Remove(obj);
+
+            if (idx[key].Count == 0) // If the cell is empty after removal, remove it from the index
+                idx.Remove(key);
         }
     }
 
     public void Remove(FloatingPoint v, object obj)
     {
-        foreach (string key in Keys(v))
-        {
-            if (idx.ContainsKey(key))
-            {
-                idx[key].Remove(obj);
+        var key = Key(v);
 
-                if (idx[key].Count == 0) // If the cell is empty after removal, remove it from the index
-                    idx.Remove(key);
-            }
+        if (idx.ContainsKey(key))
+        {
+            idx[key].Remove(obj);
+
+            if (idx[key].Count == 0) // If the cell is empty after removal, remove it from the index
+                idx.Remove(key);
         }
     }
 
