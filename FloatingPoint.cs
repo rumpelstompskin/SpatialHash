@@ -9,6 +9,13 @@ public class FloatingPoint
     public double y;
     public double z;
 
+    public FloatingPoint()
+    {
+        this.x = 0;
+        this.y = 0;
+        this.z = 0;
+    }
+
     public FloatingPoint(double x, double y, double z)
     {
         this.x = x;
@@ -40,7 +47,15 @@ public class FloatingPoint
 
     public static FloatingPoint operator +(FloatingPoint a, FloatingPoint b) => new FloatingPoint(a.x + b.x, a.y + b.y, a.z + b.z);
 
+    public static FloatingPoint operator +(FloatingPoint a, Vector3 b) => new FloatingPoint(a.x + b.x, a.y + b.y, a.z + b.z);
+
+    public static FloatingPoint operator +(Vector3 a, FloatingPoint b) => new FloatingPoint(a.x + b.x, a.y + b.y, a.z + b.z);
+
     public static FloatingPoint operator -(FloatingPoint a, FloatingPoint b) => new FloatingPoint(a.x - b.x, a.y - b.y, a.z - b.z);
+
+    public static FloatingPoint operator -(FloatingPoint a, Vector3 b) => new FloatingPoint(a.x - b.x, a.y - b.y, a.z - b.z);
+
+    public static FloatingPoint operator -(Vector3 a, FloatingPoint b) => new FloatingPoint(a.x - b.x, a.y - b.y, a.z - b.z);
 
     public static FloatingPoint operator -(FloatingPoint point) => new FloatingPoint(-point.x, -point.y, -point.z);
 
@@ -91,7 +106,7 @@ public class FloatingPoint
     /// <summary>
     /// Property to get the position as a <see cref="FloatingPoint"/> instance.
     /// </summary>
-    public FloatingPoint Position => new FloatingPoint(x, y, z);
+    public FloatingPoint Position => new FloatingPoint(x, y, z); // TODO Not needed.
 
     /// <summary>
     /// Property to get the normalized value of the position.
