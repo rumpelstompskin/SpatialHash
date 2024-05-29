@@ -1,41 +1,41 @@
 using UnityEngine;
 using UnityEditor;
+using Sirenix.OdinInspector.Editor;
+using Sirenix.Utilities.Editor;
 
 [CustomPropertyDrawer(typeof(FloatingPoint))]
-public class FloatingPointDrawer : PropertyDrawer
+public class FloatingPointDrawer : OdinValueDrawer<FloatingPoint>
 {
-    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+    protected override void DrawPropertyLayout(GUIContent label)
     {
-        EditorGUI.BeginProperty(position, label, property);
+        var value = this.ValueEntry.SmartValue;
 
-        // Split the position into three equal parts for x, y, and z values
-        float singleFieldWidth = position.width / 3f;
+        SirenixEditorGUI.BeginBox();
+        SirenixEditorGUI.BeginBoxHeader();
 
-        // Create sub-properties for x, y, and z
-        SerializedProperty xProp = property.FindPropertyRelative("x");
-        SerializedProperty yProp = property.FindPropertyRelative("y");
-        SerializedProperty zProp = property.FindPropertyRelative("z");
+        if (label != null)
+        {
+            EditorGUILayout.LabelField(label);
+        }
 
-        // Draw labels for x, y, and z
-        Rect xLabelRect = new Rect(position.x, position.y, singleFieldWidth, EditorGUIUtility.singleLineHeight);
-        EditorGUI.LabelField(xLabelRect, "X:");
+        SirenixEditorGUI.EndBoxHeader();
 
-        Rect yLabelRect = new Rect(position.x + singleFieldWidth + 5, position.y, singleFieldWidth, EditorGUIUtility.singleLineHeight);
-        EditorGUI.LabelField(yLabelRect, "Y:");
+        EditorGUILayout.BeginHorizontal();
 
-        Rect zLabelRect = new Rect(position.x + 2 * singleFieldWidth + 5, position.y, singleFieldWidth, EditorGUIUtility.singleLineHeight);
-        EditorGUI.LabelField(zLabelRect, "Z:");
+        // Draw the X field
+        EditorGUILayout.LabelField("X:", GUILayout.Width(20));
+        value.x = EditorGUILayout.DoubleField(value.x, GUILayout.MinWidth(100));
 
-        // Draw the x, y, and z fields side by side
-        Rect xRect = new Rect(position.x + (singleFieldWidth * 0.15f), position.y, singleFieldWidth * 0.8f, EditorGUIUtility.singleLineHeight);
-        EditorGUI.PropertyField(xRect, xProp, GUIContent.none);
+        // Draw the Y field
+        EditorGUILayout.LabelField("Y:", GUILayout.Width(20));
+        value.y = EditorGUILayout.DoubleField(value.y, GUILayout.MinWidth(100));
 
-        Rect yRect = new Rect(position.x + singleFieldWidth + (singleFieldWidth * 0.15f) + 5, position.y, singleFieldWidth * 0.8f, EditorGUIUtility.singleLineHeight);
-        EditorGUI.PropertyField(yRect, yProp, GUIContent.none);
+        // Draw the Z field
+        EditorGUILayout.LabelField("Z:", GUILayout.Width(20));
+        value.z = EditorGUILayout.DoubleField(value.z, GUILayout.MinWidth(100));
 
-        Rect zRect = new Rect(position.x + 2 * singleFieldWidth + (singleFieldWidth * 0.15f) + 5, position.y, singleFieldWidth * 0.8f, EditorGUIUtility.singleLineHeight);
-        EditorGUI.PropertyField(zRect, zProp, GUIContent.none);
+        EditorGUILayout.EndHorizontal();
 
-        EditorGUI.EndProperty();
+        SirenixEditorGUI.EndBox();
     }
 }
